@@ -14,68 +14,50 @@ namespace Publisher
             string clientId = Guid.NewGuid().ToString();
             mqttClient.MqttMsgPublishReceived += client_recievedMessage;
             mqttClient.Connect(clientId);
-            Console.WriteLine("Abone Olundu: test/deneme");
+            Console.WriteLine("Publisher Ekrani");
 
             string Topic = "";
 
 
-        //don:
 
-
-        //switch (secim)
-        //{
-        //    case 1:
-        //        Console.WriteLine("Mesajı girin: ");
-
-        //        string message = Console.ReadLine();
-
-
-        //        mqttClient.Publish(Topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, true);
-        //        break;
-        //    case 2:
-        //        mqttClient.Subscribe(new String[] { Topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-        //        break;
-
-        //    case 3:
-        //        goto don;
-
-        //}
         Don:
             Console.WriteLine("1- NodeServer");
             Console.WriteLine("2- NodeCliend");
             Console.WriteLine("3 - Cikis");
             Console.WriteLine("** - Anasayfa");
-            Topic = Console.ReadLine();
-
-
-
 
             do
             {
 
+                Topic = Console.ReadLine();
+                if (Topic == "1")
+                {
+                    while (Topic != "**")
+                    {
+                        Console.WriteLine("Mesajı girin: ");
+
+                        string message = Console.ReadLine();
+
+                        if (message == "**")
+                        {
+                            goto Don;
+                        }
+
+                        mqttClient.Publish(Topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, true);
 
 
+                    }
+
+                }
 
 
-
-
-
-                if (Topic == "2")
+                else if (Topic == "2")
                 {
                     mqttClient.Subscribe(new String[] { Topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
 
                 }
 
-                else if (Topic == "1")
-                {
-                    Console.WriteLine("Mesajı girin: ");
 
-                    string message = Console.ReadLine();
-
-
-                    mqttClient.Publish(Topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, true);
-
-                }
                 else if (Topic == "**")
                 {
                     goto Don;
