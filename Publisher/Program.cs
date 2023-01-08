@@ -10,7 +10,7 @@ namespace Publisher
         static void Main(string[] args)
         {
 
-            MqttClient mqttClient = new MqttClient("localhost");
+            MqttClient mqttClient = new MqttClient("broker.hivemq.com");
             string clientId = Guid.NewGuid().ToString();
             mqttClient.MqttMsgPublishReceived += client_recievedMessage;
             mqttClient.Connect(clientId);

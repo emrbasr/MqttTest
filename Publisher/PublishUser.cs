@@ -1,30 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+using uPLibrary.Networking.M2Mqtt;
 
-namespace Client
+namespace Publisher
 {
-    
-    public class CliendUser
+    public class PublishUser
     {
-        private MqttClient mqttClient  = new MqttClient("broker.hivemq.com");
-        public CliendUser()
+        private MqttClient mqttClient = new MqttClient("broker.hivemq.com");
+        public PublishUser()
         {
-            
-            
+
+
             mqttClient.MqttMsgPublishReceived += client_recievedMessage;
             string clientId = Guid.NewGuid().ToString();
             mqttClient.Connect(clientId);
 
-            
-            
-           
 
-        
+
+
+
+
         }
 
-        public void Start() 
+        public void Start()
         {
             string Topic = "";
 
@@ -43,13 +43,13 @@ namespace Client
                 Topic = Console.ReadLine();
 
 
-                if (Topic == "1")
+                if (Topic == "2")
                 {
                     mqttClient.Subscribe(new String[] { Topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
 
                 }
 
-                else if (Topic == "2")
+                else if (Topic == "1")
                 {
                     while (Topic != "**")
                     {
@@ -86,5 +86,4 @@ namespace Client
             System.Console.WriteLine("Publish Mesaj:  " + message1);
         }
     }
-    
 }
