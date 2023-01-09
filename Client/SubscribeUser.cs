@@ -21,7 +21,7 @@ namespace Client
         {
             string Topic = "";
 
-            Console.WriteLine("Subscribe Screen");
+            Console.WriteLine("Subscriber Screen");
 
 
         back:
