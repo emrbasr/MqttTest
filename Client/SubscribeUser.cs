@@ -6,10 +6,10 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 namespace Client
 {
     
-    public class CliendUser
+    public class SubscribeUser
     {
         private MqttClient mqttClient  = new MqttClient("broker.hivemq.com");
-        public CliendUser()
+        public SubscribeUser()
         {
             
             
@@ -17,25 +17,20 @@ namespace Client
             string clientId = Guid.NewGuid().ToString();
             mqttClient.Connect(clientId);
 
-            
-            
-           
-
-        
         }
 
         public void Start() 
         {
             string Topic = "";
 
-            Console.WriteLine("Cliend Ekrani");
+            Console.WriteLine("Subscribe Screen");
 
 
-        Don:
+        back:
             Console.WriteLine("1- NodeServer");
             Console.WriteLine("2- NodeCliend");
-            Console.WriteLine("3 - Cikis");
-            Console.WriteLine("** - Anasayfa");
+            Console.WriteLine("3 - Exit");
+            Console.WriteLine("** - Main Page");
 
             do
             {
@@ -53,13 +48,13 @@ namespace Client
                 {
                     while (Topic != "**")
                     {
-                        Console.WriteLine("Mesajı girin: ");
+                        Console.WriteLine("Send Message: ");
 
                         string message = Console.ReadLine();
 
                         if (message == "**")
                         {
-                            goto Don;
+                            goto back;
                         }
 
                         mqttClient.Publish(Topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, true);
@@ -74,7 +69,7 @@ namespace Client
 
                 else if (Topic == "**")
                 {
-                    goto Don;
+                    goto back;
                 }
 
             } while (Topic != "3");
@@ -83,7 +78,7 @@ namespace Client
         static void client_recievedMessage(object sender, MqttMsgPublishEventArgs e)
         {
             var message1 = System.Text.Encoding.Default.GetString(e.Message);
-            System.Console.WriteLine("Publish Mesaj:  " + message1);
+            System.Console.WriteLine("Publish Message:  " + message1);
         }
     }
     
