@@ -5,21 +5,19 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Client
 {
-    
+
     public class SubscribeUser
     {
-        private MqttClient mqttClient  = new MqttClient("broker.hivemq.com");
+        private MqttClient mqttClient = new MqttClient("broker.hivemq.com");
         public SubscribeUser()
         {
-            
-            
             mqttClient.MqttMsgPublishReceived += client_recievedMessage;
             string clientId = Guid.NewGuid().ToString();
             mqttClient.Connect(clientId);
 
         }
 
-        public void Start() 
+        public void Start()
         {
             string Topic = "";
 
@@ -34,6 +32,7 @@ namespace Client
 
             do
             {
+
 
                 Topic = Console.ReadLine();
 
@@ -62,9 +61,6 @@ namespace Client
 
                     }
 
-
-
-
                 }
 
                 else if (Topic == "**")
@@ -81,5 +77,5 @@ namespace Client
             System.Console.WriteLine("Publish Message:  " + message1);
         }
     }
-    
+
 }

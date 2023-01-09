@@ -11,8 +11,6 @@ namespace Publisher
         private MqttClient mqttClient = new MqttClient("broker.hivemq.com");
         public PublishUser()
         {
-
-
             mqttClient.MqttMsgPublishReceived += client_recievedMessage;
             string clientId = Guid.NewGuid().ToString();
             mqttClient.Connect(clientId);
@@ -25,7 +23,6 @@ namespace Publisher
 
             Console.WriteLine("Publisher Screen");
 
-
         back:
             Console.WriteLine("1- NodeServer");
             Console.WriteLine("2- NodeCliend");
@@ -37,14 +34,7 @@ namespace Publisher
 
                 Topic = Console.ReadLine();
 
-
-                if (Topic == "2")
-                {
-                    mqttClient.Subscribe(new String[] { Topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-
-                }
-
-                else if (Topic == "1")
+                if (Topic == "1")
                 {
                     while (Topic != "**")
                     {
@@ -62,10 +52,15 @@ namespace Publisher
 
                     }
 
+                }
 
-
+                else if (Topic == "2")
+                {
+                    mqttClient.Subscribe(new String[] { Topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
 
                 }
+
+
 
                 else if (Topic == "**")
                 {
